@@ -1,5 +1,5 @@
 #include "Functions.h"
-#include "../../gtom/include/CubicInterp.cuh"
+#include "CubicInterp.cuh"
 using namespace gtom;
 
 template <bool cubicinterp> __global__ void RaycastKernel(cudaTex t_intensities, 

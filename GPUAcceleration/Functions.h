@@ -1,7 +1,7 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-#include "../../gtom/include/GTOM.cuh"
+#include "GTOM.cuh"
 
 using namespace std;
 

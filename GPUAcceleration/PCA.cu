@@ -1,5 +1,5 @@
 #include "Functions.h"
-#include "../../gtom/include/DeviceFunctions.cuh"
+#include "DeviceFunctions.cuh"
 using namespace gtom;
 
 #define TOMO_THREADS 128

@@ -58,6 +58,9 @@
     <CudaCompile Include="MPARefine.cu" />
     <CudaCompile Include="Tools.cu" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7976E078-C29C-487D-B354-F9ED8A497178}</ProjectGuid>
     <RootNamespace>GPUAcceleration</RootNamespace>
@@ -91,19 +94,26 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.3.targets" />
+    <Import Project="..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets" Condition="Exists('..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets')" />
+    <Import Project="..\packages\libjpeg.9.0.1.4\build\native\libjpeg.targets" Condition="Exists('..\packages\libjpeg.9.0.1.4\build\native\libjpeg.targets')" />
+    <Import Project="..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets" Condition="Exists('..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets')" />
+    <Import Project="..\packages\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\libtiff.4.0.6.2\build\native\libtiff.targets" Condition="Exists('..\packages\libtiff.4.0.6.2\build\native\libtiff.targets')" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\</OutDir>
-    <IncludePath>..\..\libtiff\libtiff;..\..\libtiff\buildx64\libtiff;include;..\..\liblion;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>..\..\libtiff\buildx64\libtiff\Release;..\..\liblion\x64\Debug;..\..\liblion\fftw;..\..\gtom\x64\Debug;$(CUDA_PATH)\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>C:\Users\Luis\Desktop\RFI\Warp\gtom-master\include;include;C:\Users\Luis\Desktop\RFI\Warp\liblion-master;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Luis\Desktop\RFI\Warp\liblion-master\x64\Debug;C:\Users\Luis\Desktop\RFI\Warp\liblion-master\fftw;C:\Users\Luis\Desktop\RFI\Warp\gtom-master\x64\Debug;$(CUDA_PATH)\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Release\</OutDir>
-    <IncludePath>..\..\libtiff\libtiff;..\..\libtiff\buildx64\libtiff;include;..\..\liblion;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>..\..\libtiff\buildx64\libtiff\Release;..\..\liblion\x64\Release;..\..\liblion\fftw;..\..\gtom\x64\Release;$(CUDA_PATH)\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>C:\Users\Luis\Desktop\RFI\Warp\gtom-master\include;include;C:\Users\Luis\Desktop\RFI\Warp\liblion-master;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Luis\Desktop\RFI\Warp\liblion-master\x64\Release;C:\Users\Luis\Desktop\RFI\Warp\liblion-master\fftw;C:\Users\Luis\Desktop\RFI\Warp\gtom-master\x64\Release;$(CUDA_PATH)\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -117,21 +127,32 @@
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>cudart.lib;cufft.lib;cublas.lib;curand.lib;GTOM.lib;liblion.lib;fftw3f.lib;tiff.lib</AdditionalDependencies>
+      <AdditionalDependencies>libtiff.lib;cudart.lib;cufft.lib;cublas.lib;curand.lib;GTOM.lib;liblion.lib;fftw3f.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)packages\libtiff.4.0.6.2\build\native\lib\$(Configuration)\$(Platform)\v140;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(CudaToolkitBinDir)\cudart64_100.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cufft64_100.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cublas64_100.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cudnn64_7.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\curand64_100.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cusolver64_100.dll" "$(OutDir)"
-copy "..\..\libtiff\buildx64\libtiff\Release\tiff.dll" "$(OutDir)"
-copy "..\..\zlib-1.2.11\bin\zlib.dll" "$(OutDir)"</Command>
+      <Command>echo CudaToolkit
+copy "$(CudaToolkitBinDir)\cudart64_110.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cufft64_10.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cublas64_11.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\curand64_10.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cusolver64_11.dll" "$(OutDir)"
+echo CudaDnn
+copy "C:\Users\Luis\Desktop\RFI\Warp\cudnn-10.0-windows10-x64-v7.4.2.24\cuda\bin\cudnn64_7.dll" "$(OutDir)"
+
+echo Others (libtiff)
+copy "$(SolutionDir)packages\libtiff.redist.4.0.6.2\build\native\bin\$(Configuration)\$(Platform)\v140\libtiff.dll" "$(OutDir)"
+copy "$(SolutionDir)packages\libjpeg.redist.9.0.1.4\build\native\bin\v140\$(Platform)\$(Configuration)\dynamic\cdecl\jpeg.dll" "$(OutDir)"
+copy "$(SolutionDir)packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\lib\native\v140\windesktop\msvcstl\dyn\rt-dyn\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+
+echo Others (liblion)
+copy "C:\Users\Luis\Desktop\RFI\Warp\liblion-master\fftw\fftw3f.dll" "$(OutDir)"</Command>
+      <Message>Copies necessary DLL's</Message>
     </PostBuildEvent>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -151,29 +172,42 @@ copy "..\..\zlib-1.2.11\bin\zlib.dll" "$(OutDir)"</Command>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN64;_CONSOLE;FLOAT_PRECISION;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN64;FLOAT_PRECISION;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OpenMPSupport>true</OpenMPSupport>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>cudart.lib;cufft.lib;cublas.lib;curand.lib;GTOM.lib;liblion.lib;fftw3f.lib;tiff.lib</AdditionalDependencies>
+      <AdditionalDependencies>libtiff.lib;cudart.lib;cufft.lib;cublas.lib;curand.lib;GTOM.lib;liblion.lib;fftw3f.lib;libtiff.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>$(SolutionDir)packages\libtiff.4.0.6.2\build\native\lib\$(Configuration)\$(Platform)\v140;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(CudaToolkitBinDir)\cudart64_100.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cufft64_100.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cublas64_100.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cudnn64_7.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\curand64_100.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cusolver64_100.dll" "$(OutDir)"
-copy "..\..\libtiff\buildx64\libtiff\Release\tiff.dll" "$(OutDir)"
-copy "..\..\zlib-1.2.11\bin\zlib.dll" "$(OutDir)"</Command>
+      <Command>echo CudaToolkit
+copy "$(CudaToolkitBinDir)\cudart64_110.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cufft64_10.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cublas64_11.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\curand64_10.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cusolver64_11.dll" "$(OutDir)"
+echo CudaDnn
+copy "C:\Users\Luis\Desktop\RFI\Warp\cudnn-10.0-windows10-x64-v7.4.2.24\cuda\bin\cudnn64_7.dll" "$(OutDir)"
+
+echo Others (libtiff)
+copy "$(SolutionDir)packages\libtiff.redist.4.0.6.2\build\native\bin\$(Configuration)\$(Platform)\v140\libtiff.dll" "$(OutDir)"
+copy "$(SolutionDir)packages\libjpeg.redist.9.0.1.4\build\native\bin\v140\$(Platform)\$(Configuration)\dynamic\cdecl\jpeg.dll" "$(OutDir)"
+copy "$(SolutionDir)packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\lib\native\v140\windesktop\msvcstl\dyn\rt-dyn\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
+
+echo Others (liblion)
+copy "C:\Users\Luis\Desktop\RFI\Warp\liblion-master\fftw\fftw3f.dll" "$(OutDir)"</Command>
+      <Message>Copies necessary DLL's</Message>
     </PostBuildEvent>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -185,4 +219,15 @@ copy "..\..\zlib-1.2.11\bin\zlib.dll" "$(OutDir)"</Command>
       </AdditionalCompilerOptions>
     </CudaCompile>
   </ItemDefinitionGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\libjpeg.9.0.1.4\build\native\libjpeg.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libjpeg.9.0.1.4\build\native\libjpeg.targets'))" />
+    <Error Condition="!Exists('..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.targets'))" />
+    <Error Condition="!Exists('..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets'))" />
+    <Error Condition="!Exists('..\packages\libtiff.4.0.6.2\build\native\libtiff.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libtiff.4.0.6.2\build\native\libtiff.targets'))" />
+  </Target>
 </Project>

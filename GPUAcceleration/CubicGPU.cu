@@ -1,6 +1,6 @@
 #include "Functions.h"
 using namespace gtom;
-#include "../../gtom/include/CubicInterp.cuh"
+#include "CubicInterp.cuh"
 
 __global__ void CubicGPUInterpIrregularKernel(cudaTex t_input, int3 dimsgrid, float3* d_positions, int npositions, float* d_output);
 

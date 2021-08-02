@@ -1,5 +1,5 @@
 #include "Functions.h"
-#include "../../gtom/include/CubicInterp.cuh"
+#include "CubicInterp.cuh"
 using namespace gtom;
 
 template <bool iscentered, bool sliceonly> __global__ void ProjBackwardKernel(float* d_volume, int3 dimsvolume, cudaTex* dt_image, glm::mat4* d_transforms, bool halfonly);

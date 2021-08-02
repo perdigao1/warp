@@ -62,6 +62,12 @@ namespace Warp
             try
             {
                 Options.Runtime.DeviceCount = GPU.GetDeviceCount();
+                //If code fails here is probably because it failed to load GPUAcceleration.dll
+                //If you are a developer this could be because either this file is not in the /bin (debug) or /Release folder
+                //or its dependencies cannot be found. If the latter, check GPUAcceleration.dll with Dependency Walker tool
+                //The post build step should copy hte necessary files correctly, libtiff.dll (and its dependencies jpeg.lib and zlib.lib)
+                //and fftw3f.dll (from liblion)
+
                 if (Options.Runtime.DeviceCount <= 0)
                     throw new Exception();
             }
@@ -75,7 +81,9 @@ namespace Warp
                                 "-Any bundled libraries missing? (reinstall Warp to be sure)\n" +
                                 "\n" +
                                 "If none of this works, please report the issue in https://groups.google.com/forum/#!forum/warp-em");
-                Close();
+
+                //Close();
+                Application.Current.Shutdown();
             }
 
             GPU.SetDevice(0);

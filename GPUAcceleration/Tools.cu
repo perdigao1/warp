@@ -1,5 +1,5 @@
 #include "Functions.h"
-#include "../../gtom/include/CubicInterp.cuh"
+#include "CubicInterp.cuh"
 using namespace gtom;
 
 __declspec(dllexport) void FFT(float* d_input, float2* d_output, int3 dims, uint batch, cufftHandle plan)
