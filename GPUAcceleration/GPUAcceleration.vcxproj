@@ -61,6 +61,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="COMPILATION.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7976E078-C29C-487D-B354-F9ED8A497178}</ProjectGuid>
     <RootNamespace>GPUAcceleration</RootNamespace>
@@ -78,12 +81,12 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.1.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.8.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -93,7 +96,7 @@
   </ImportGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.1.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.8.targets" />
     <Import Project="..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets" Condition="Exists('..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets')" />
     <Import Project="..\packages\libjpeg.9.0.1.4\build\native\libjpeg.targets" Condition="Exists('..\packages\libjpeg.9.0.1.4\build\native\libjpeg.targets')" />
     <Import Project="..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets" Condition="Exists('..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets')" />
@@ -105,14 +108,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\</OutDir>
-    <IncludePath>C:\Users\Luis\Desktop\RFI\Warp\gtom-master\include;include;C:\Users\Luis\Desktop\RFI\Warp\liblion-master;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Luis\Desktop\RFI\Warp\liblion-master\x64\Debug;C:\Users\Luis\Desktop\RFI\Warp\liblion-master\fftw;C:\Users\Luis\Desktop\RFI\Warp\gtom-master\x64\Debug;$(CUDA_PATH)\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\git-warp-gtom\include;$(SolutionDir)..\git-warp-liblion;include;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\git-warp-gtom\x64\$(Configuration);$(SolutionDir)..\git-warp-liblion\x64\$(Configuration);$(SolutionDir)..\git-warp-liblion\fftw;$(CUDA_PATH)\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Release\</OutDir>
-    <IncludePath>C:\Users\Luis\Desktop\RFI\Warp\gtom-master\include;include;C:\Users\Luis\Desktop\RFI\Warp\liblion-master;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Luis\Desktop\RFI\Warp\liblion-master\x64\Release;C:\Users\Luis\Desktop\RFI\Warp\liblion-master\fftw;C:\Users\Luis\Desktop\RFI\Warp\gtom-master\x64\Release;$(CUDA_PATH)\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\git-warp-gtom\include;$(SolutionDir)..\git-warp-liblion;include;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\git-warp-gtom\x64\$(Configuration);$(SolutionDir)..\git-warp-liblion\x64\$(Configuration);$(SolutionDir)..\git-warp-liblion\fftw;$(CUDA_PATH)\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -143,7 +146,7 @@ copy "$(CudaToolkitBinDir)\cublas64_11.dll" "$(OutDir)"
 copy "$(CudaToolkitBinDir)\curand64_10.dll" "$(OutDir)"
 copy "$(CudaToolkitBinDir)\cusolver64_11.dll" "$(OutDir)"
 echo CudaDnn
-copy "C:\Users\Luis\Desktop\RFI\Warp\cudnn-10.0-windows10-x64-v7.4.2.24\cuda\bin\cudnn64_7.dll" "$(OutDir)"
+rem copy "C:\Users\Luis\Desktop\RFI\Warp\cudnn-10.0-windows10-x64-v7.4.2.24\cuda\bin\cudnn64_7.dll" "$(OutDir)"
 
 echo Others (libtiff)
 copy "$(SolutionDir)packages\libtiff.redist.4.0.6.2\build\native\bin\$(Configuration)\$(Platform)\v140\libtiff.dll" "$(OutDir)"
@@ -151,7 +154,7 @@ copy "$(SolutionDir)packages\libjpeg.redist.9.0.1.4\build\native\bin\v140\$(Plat
 copy "$(SolutionDir)packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\lib\native\v140\windesktop\msvcstl\dyn\rt-dyn\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
 
 echo Others (liblion)
-copy "C:\Users\Luis\Desktop\RFI\Warp\liblion-master\fftw\fftw3f.dll" "$(OutDir)"</Command>
+copy "$(SolutionDir)..\git-warp-liblion\fftw\fftw3f.dll" "$(OutDir)"</Command>
       <Message>Copies necessary DLL's</Message>
     </PostBuildEvent>
     <CudaCompile>
@@ -198,7 +201,7 @@ copy "$(CudaToolkitBinDir)\cublas64_11.dll" "$(OutDir)"
 copy "$(CudaToolkitBinDir)\curand64_10.dll" "$(OutDir)"
 copy "$(CudaToolkitBinDir)\cusolver64_11.dll" "$(OutDir)"
 echo CudaDnn
-copy "C:\Users\Luis\Desktop\RFI\Warp\cudnn-10.0-windows10-x64-v7.4.2.24\cuda\bin\cudnn64_7.dll" "$(OutDir)"
+rem copy "C:\Users\Luis\Desktop\RFI\Warp\cudnn-10.0-windows10-x64-v7.4.2.24\cuda\bin\cudnn64_7.dll" "$(OutDir)"
 
 echo Others (libtiff)
 copy "$(SolutionDir)packages\libtiff.redist.4.0.6.2\build\native\bin\$(Configuration)\$(Platform)\v140\libtiff.dll" "$(OutDir)"
@@ -206,7 +209,7 @@ copy "$(SolutionDir)packages\libjpeg.redist.9.0.1.4\build\native\bin\v140\$(Plat
 copy "$(SolutionDir)packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\lib\native\v140\windesktop\msvcstl\dyn\rt-dyn\$(Platform)\$(Configuration)\*.dll" "$(OutDir)"
 
 echo Others (liblion)
-copy "C:\Users\Luis\Desktop\RFI\Warp\liblion-master\fftw\fftw3f.dll" "$(OutDir)"</Command>
+copy "$(SolutionDir)..\git-warp-liblion\fftw\fftw3f.dll" "$(OutDir)"</Command>
       <Message>Copies necessary DLL's</Message>
     </PostBuildEvent>
     <CudaCompile>

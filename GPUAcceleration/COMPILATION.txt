@@ -1,0 +1,18 @@
+Compilation notes
+
+In order to compile the project GPUAccleration, the libraries GTOM and LIBLION must be availabel.
+These are both from Tegunov
+
+After compiling successfully GTOM And LIBLION with VisualStudio, next step is to compile this project
+using them.
+
+Important changes mush be made to project settings:
+All configurations - Include Directories
+	point to GTOM's and and LIBLION's include
+Debug and Release configurations - set seperately Library Directories
+	point to GTOM's and and LIBLION's lib folders
+	Make sure the debug configuration points to the debug libs, and Release points to Release libs
+	GTOM folder: /x64/<Release/Debug>
+	Liblion folder: /x64/<Release/Debug> AND /fftw
+
+Newer versions of GTOM are difficult to compile and throuw many "unresolved external symbol" errors

@@ -2,6 +2,8 @@
 #include "liblion.h"
 using namespace gtom;
 
+//TODO: Rewrite to use GPU CUDA FFT's
+
 __declspec(dllexport) void __stdcall FFT_CPU(float* data, float* result, int3 dims, int nthreads)
 {
     relion::MultidimArray<float> Input;

@@ -1,5 +1,5 @@
 #include "Functions.h"
-#include "liblion.h"
+//#include "liblion.h"
 using namespace gtom;
 
 __declspec(dllexport) void __stdcall ConicalFSC(float2* volume1ft, float2* volume2ft, int3 dims, float3* directions, int ndirections, float anglestep, int minshell, float threshold, float particlefraction, float* result)
