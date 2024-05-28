@@ -2125,6 +2125,8 @@ namespace Warp
             Image Patches;
             Image PatchesAverage;
             Image Shifts;
+
+            //Why brackets?
             {
                 List<long> Positions = new List<long>();
                 List<float2> Factors = new List<float2>();
@@ -2184,6 +2186,8 @@ namespace Warp
                 Patches = new Image(IntPtr.Zero, new int3(MaskLength, DimsPositionGrid.X * DimsPositionGrid.Y, NFrames), false, true, false);
                 Image Sigma = new Image(IntPtr.Zero, new int3(DimsRegion), true);
 
+
+                //What does this function do?
                 GPU.CreateShift(originalStack.GetHostPinned(Intent.Read),
                                 DimsImage,
                                 originalStack.Dims.Z,

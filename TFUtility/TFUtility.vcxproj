@@ -54,12 +54,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\</OutDir>
-    <IncludePath>$(TENSORFLOW_LIBS)\external\eigen_archive;$(TENSORFLOW_LIBS)\..\..\..;$(TENSORFLOW_LIBS)\..\..\..\third_party\eigen3;$(TENSORFLOW_LIBS)\protobuf\src\protobuf\src;$(TENSORFLOW_LIBS)\external\nsync\public;$(TENSORFLOW_LIBS);$(TENSORFLOW_LIBS)\external\zlib_archive;$(TENSORFLOW_LIBS)\external\gif_archive\giflib-5.1.4;$(TENSORFLOW_LIBS)\external\png_archive;$(TENSORFLOW_LIBS)\external\jpeg_archive;$(TENSORFLOW_LIBS)\external\lmdb;$(TENSORFLOW_LIBS)\gemmlowp\src\gemmlowp;$(TENSORFLOW_LIBS)\jsoncpp\src\jsoncpp;$(TENSORFLOW_LIBS)\external\farmhash_archive;$(TENSORFLOW_LIBS)\external\farmhash_archive\util;$(TENSORFLOW_LIBS)\external\highwayhash;$(TENSORFLOW_LIBS)\cub\src\cub;$(TENSORFLOW_LIBS)\re2\install\include;$(TENSORFLOW_LIBS)\external\sqlite;$(TENSORFLOW_LIBS)\grpc\src\grpc\include;$(CUDA_PATH)\include;$(TENSORFLOW_LIBS)\snappy\src\snappy;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\tensorflow_1.10_tegunov\tensorflow_1.10_windows-r1.10_windows;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <TargetName>libtensorflow</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Release\</OutDir>
-    <IncludePath>$(TENSORFLOW_LIBS)\external\eigen_archive;$(TENSORFLOW_LIBS)\..\..\..;$(TENSORFLOW_LIBS)\..\..\..\third_party\eigen3;$(TENSORFLOW_LIBS)\protobuf\src\protobuf\src;$(TENSORFLOW_LIBS)\external\nsync\public;$(TENSORFLOW_LIBS);$(TENSORFLOW_LIBS)\external\zlib_archive;$(TENSORFLOW_LIBS)\external\gif_archive\giflib-5.1.4;$(TENSORFLOW_LIBS)\external\png_archive;$(TENSORFLOW_LIBS)\external\jpeg_archive;$(TENSORFLOW_LIBS)\external\lmdb;$(TENSORFLOW_LIBS)\gemmlowp\src\gemmlowp;$(TENSORFLOW_LIBS)\jsoncpp\src\jsoncpp;$(TENSORFLOW_LIBS)\external\farmhash_archive;$(TENSORFLOW_LIBS)\external\farmhash_archive\util;$(TENSORFLOW_LIBS)\external\highwayhash;$(TENSORFLOW_LIBS)\cub\src\cub;$(TENSORFLOW_LIBS)\re2\install\include;$(TENSORFLOW_LIBS)\external\sqlite;$(TENSORFLOW_LIBS)\grpc\src\grpc\include;$(CUDA_PATH)\include;$(TENSORFLOW_LIBS)\snappy\src\snappy;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\tensorflow_1.10_tegunov\tensorflow_1.10_windows-r1.10_windows;$(CUDA_PATH)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <TargetName>libtensorflow</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -88,6 +88,10 @@
 /WHOLEARCHIVE:tf_stream_executor.lib
 /WHOLEARCHIVE:libjpeg.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -115,6 +119,10 @@
 /WHOLEARCHIVE:tf_stream_executor.lib
 /WHOLEARCHIVE:libjpeg.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="graph.cpp" />

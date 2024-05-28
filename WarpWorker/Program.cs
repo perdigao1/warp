@@ -86,6 +86,12 @@ namespace WarpWorker
 
             while (true)
             {
+                //Creates a new inwards pipe (communications with worker) with server being '.' and name being <PipeName>_out
+                //It appears that the only thing it does is to receive a 'command', probably from Wrap.exe
+                // Commands accepted: Exit, Ping, SetHeaderlessParams, LoadGainRef, LoadStack, MovieProcessCTF,
+                // MovieProcessMovement, MovieExportMovie, MovieExportParticles, TomoProcessCTF, TomoExportParticles,
+                // MPAPreparePopulation, MPARefine
+
                 PipeReceive = new NamedPipeClientStream(".", PipeName + "_out", PipeDirection.In);
                 PipeReceive.Connect();
 
@@ -179,7 +185,8 @@ namespace WarpWorker
 
                         if (Helper.PathToNameWithExtension(Path) != OriginalStackOwner)
                             throw new Exception("Currently loaded stack doesn't match the movie requested for processing!");
-
+                        
+                        //Motion Correction, uses Movie class, ProcessShift function, stores metadata of the correction (star file?)
                         Movie M = new Movie(Path);
                         M.ProcessShift(OriginalStack, Options);
                         M.SaveMeta();

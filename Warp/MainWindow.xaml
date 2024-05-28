@@ -9,7 +9,7 @@
                xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
                xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
                xmlns:Dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-               Title="Durchlichtelektronenmikroskopiebilddatenentzerrungswerkzeug 1.0.9"
+               Title="Warp"
                UseLayoutRounding="True" 
                ShowTitleBar="True" 
                SnapsToDevicePixels="False" 
@@ -20,8 +20,8 @@
                WindowTitleBrush="#41b1e1"
                MinWidth="1536"
                MinHeight="1000"
-               Width="1536"
-               Height="1150">
+               Width="1500"
+               Height="900">
     <Window.Resources>
         <ResourceDictionary>
             <l:NyquistAngstromConverter x:Key="nyquistAngstromConverter" />
@@ -38,7 +38,11 @@
         </m:WindowCommands>
     </m:MetroWindow.RightWindowCommands>
     <Grid>
-        <Grid Name="TabRawData">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="117*"/>
+            <ColumnDefinition Width="395*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="TabRawData" Grid.ColumnSpan="2">
             <Grid.InputBindings>
                 <KeyBinding Key="Left" Command="{Binding HotKeyLeft, RelativeSource={RelativeSource FindAncestor, AncestorType=m:MetroWindow}}"/>
                 <KeyBinding Key="Right" Command="{Binding HotKeyRight, RelativeSource={RelativeSource FindAncestor, AncestorType=m:MetroWindow}}"/>
@@ -155,12 +159,12 @@
                                 </Grid.RowDefinitions>
                                 <CheckBox IsChecked="{Binding Import.CorrectGain}" FontSize="13">
                                     <CheckBox.Content>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Correct gain using: " />
-                                                <Button Name="ButtonGainPath" Style="{StaticResource HyperlinkLikeButton}" Click="ButtonGainPath_OnClick">
-                                                    <TextBlock Name="ButtonGainPathText" TextTrimming="CharacterEllipsis" TextAlignment="Right" MaxWidth="280">Select reference...</TextBlock>
-                                                </Button>
-                                            </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Correct gain using: " />
+                                            <Button Name="ButtonGainPath" Style="{StaticResource HyperlinkLikeButton}" Click="ButtonGainPath_OnClick">
+                                                <TextBlock Name="ButtonGainPathText" TextTrimming="CharacterEllipsis" TextAlignment="Right" MaxWidth="280">Select reference...</TextBlock>
+                                            </Button>
+                                        </StackPanel>
                                     </CheckBox.Content>
                                 </CheckBox>
                                 <CheckBox Grid.Row="1" IsChecked="{Binding Import.CorrectDefects}" FontSize="13">
@@ -247,8 +251,8 @@
                                 </Grid>
                             </StackPanel>
                             <StackPanel Name="PanelProcessMovement"  Orientation="Horizontal">
-                                <CheckBox Name="SwitchProcessMovement" IsChecked="{Binding ProcessMovement, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="6,0,0,7" />
                                 <Label Content="Motion" FontSize="18" Margin="0,12,0,0" />
+                                <CheckBox x:Name="SwitchProcessMovement" IsChecked="{Binding ProcessMovement, Mode=TwoWay}" />
                             </StackPanel>
                             <StackPanel Name="GridOptionsMovement" IsEnabled="{Binding ProcessMovement}" Margin="6,0" Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Height="20">
@@ -297,7 +301,7 @@
                                     <s:ValueSlider Value="{Binding Grids.MovementZ, Mode=TwoWay}" UpdateTrigger="PropertyChanged" TextFormat="{}{0}" MinValue="1" MaxValue="100" StepSize="1" />
                                 </StackPanel>
                             </Grid>
-                                
+
                             <StackPanel Name="PanelProcessPicking" Orientation="Horizontal">
                                 <CheckBox Name="SwitchProcessPicking" IsChecked="{Binding ProcessPicking, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="6,0,0,7" />
                                 <Label Content="Pick Particles" FontSize="18" Margin="0,18,0,0" />
@@ -339,7 +343,7 @@
                                     <s:ValueSlider Value="{Binding Picking.RunningWindowLength, Mode=TwoWay}" UpdateTrigger="PropertyChanged" TextFormat="{}{0} particles" MinValue="100" MaxValue="10000000" StepSize="100" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Grid>
-                                
+
                             <Label Name="LabelOutputHeader" Content="Output" FontSize="18" Margin="0,12,0,0" />
                             <Grid Name="GridOptionsPostprocessing" Margin="6,0">
                                 <Grid.RowDefinitions>
@@ -508,7 +512,7 @@
                                         </StackPanel>
                                     </Grid>
 
-                                        
+
                                     <StackPanel Name="PanelStatsDefocus" Margin="0,12,0,0">
                                         <StackPanel Orientation="Horizontal" Margin="0,8">
                                             <TextBlock Text="Defocus" FontSize="18" />
@@ -544,7 +548,7 @@
                                             </w:SingleAxisScatter.PointColors>
                                         </w:SingleAxisScatter>
                                     </StackPanel>
-                                        
+
                                     <StackPanel Name="PanelStatsPhase" Margin="0,12,0,0">
                                         <StackPanel Orientation="Horizontal" Margin="0,8">
                                             <TextBlock Text="Phase shift" FontSize="18" />
@@ -561,7 +565,7 @@
                                             </w:SingleAxisScatter.PointColors>
                                         </w:SingleAxisScatter>
                                     </StackPanel>
-                                        
+
                                     <StackPanel Name="PanelStatsResolution" Margin="0,12,0,0">
                                         <StackPanel Orientation="Horizontal" Margin="0,8">
                                             <TextBlock Text="Estimated resolution" FontSize="18" />
@@ -674,7 +678,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Name="GridMessageLogs" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6" Visibility="Collapsed">
+        <Grid Name="GridMessageLogs" Background="White" Margin="6,6,6,6" Visibility="Collapsed" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition />

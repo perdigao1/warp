@@ -323,27 +323,27 @@ namespace Warp
                     }
                 }, DispatcherPriority.ApplicationIdle);
 
-            if (!GlobalOptions.PromptShown)
-                Dispatcher.InvokeAsync(async () =>
-                {
-                    CustomDialog Dialog = new CustomDialog();
-                    Dialog.HorizontalContentAlignment = HorizontalAlignment.Center;
+            //if (!GlobalOptions.PromptShown)
+            //    Dispatcher.InvokeAsync(async () =>
+            //    {
+            //        CustomDialog Dialog = new CustomDialog();
+            //        Dialog.HorizontalContentAlignment = HorizontalAlignment.Center;
 
-                    FirstRunPrompt DialogContent = new FirstRunPrompt();
-                    DialogContent.Close += () =>
-                    {
-                        this.HideMetroDialogAsync(Dialog);
-                        GlobalOptions.PromptShown = true;
-                        GlobalOptions.AllowCollection = (bool)DialogContent.CheckAgree.IsChecked;
+            //        FirstRunPrompt DialogContent = new FirstRunPrompt();
+            //        DialogContent.Close += () =>
+            //        {
+            //            this.HideMetroDialogAsync(Dialog);
+            //            GlobalOptions.PromptShown = true;
+            //            GlobalOptions.AllowCollection = (bool)DialogContent.CheckAgree.IsChecked;
 
-                        GlobalOptions.Save(DefaultGlobalOptionsName);
+            //            GlobalOptions.Save(DefaultGlobalOptionsName);
 
-                        GlobalOptions.LogEnvironment();
-                    };
-                    Dialog.Content = DialogContent;
+            //            GlobalOptions.LogEnvironment();
+            //        };
+            //        Dialog.Content = DialogContent;
 
-                    this.ShowMetroDialogAsync(Dialog);
-                }, DispatcherPriority.ApplicationIdle);
+            //        this.ShowMetroDialogAsync(Dialog);
+            //    }, DispatcherPriority.ApplicationIdle);
 
             #endregion
 
@@ -1110,7 +1110,9 @@ namespace Warp
                 IsPreprocessing = true;
 
                 bool IsTomo = Options.Import.ExtensionTomoSTAR;
-
+                
+                //Start the Preprocessing task
+                //It is setup to run asynchronously so that UI is responsive.
                 PreprocessingTask = Task.Run(async () =>
                 {
                     int NDevices = GPU.GetDeviceCount();
@@ -1601,6 +1603,8 @@ namespace Warp
                                     return true;
                                 }
 
+                                //Motion correction
+                                //Uses MovieProcessMovement
                                 if (DoMovement && NeedsNewMotion && !IsTomo)
                                 {
                                     var TimerMotion = BenchmarkMotion.Start();
